@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -21,13 +21,24 @@ def index():
 def about():
     return render_template("about.html")
 
-@app.route('/create', method=['POST','GET'])
+@app.route('/create', methods=['POST','GET'])
+@app.route('/create', methods=['POST', 'GET'])
 def create():
     if request.method == 'POST':
-        print(request.form['title'])
-        print(request.form['text'])
-    else:
-        return render_template("create.html")
+        title = request.form['title']
+        text = request.form['text']
+
+        post = Post(title=title, text=text)
+
+        try:
+            db.session.add(post)
+            db.session.commit()
+            return redirect('/')
+        except Exception as e:
+            db.session.rollback()  # Откат транзакции в случае ошибки
+            return f"ERROR 228: {e}"  # Выводим точную причину ошибки
+        
+    return render_template("create.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
