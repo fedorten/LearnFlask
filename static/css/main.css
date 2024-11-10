@@ -1,4 +1,10 @@
 /* HEADER */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .header__img {
     height: 64px;
     width: 64px;
@@ -14,16 +20,18 @@ body {
     background-color: rgb(171, 172, 188);
     margin: 0; 
     padding: 0;
+    font-family: Arial, sans-serif; 
 }
 
 header, footer {
     padding: 20px;
-    background-color: rgb(171, 172, 188);
+
 }
 
 .page {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     min-height: 100vh; 
 }
 
@@ -37,3 +45,6 @@ header, footer {
 footer {
     margin-top: auto;
 }
+
+
+

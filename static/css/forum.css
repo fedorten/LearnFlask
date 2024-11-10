@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,300,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body {
+    background: #fbfbfb;
+    font-family: 'Merriweather', serif;
+    font-size: 16px;
+    color: #777;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h4 {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.post-item {
+    background: #fff;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.post-item:hover {
+    transform: scale(1.02);
+}
+
+.post-content h4 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.post-content p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.post-content a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.post-content a:hover {
+    text-decoration: underline;
+}
+
+.separator {
+    width: 50px;
+    height: 3px;
+    background: #777;
+    margin: 10px 0;
+}
+
+/* Мобильные устройства */
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .post-item {
+        padding: 20px;
+    }
+
+    .post-content h4 {
+        font-size: 24px;
+    }
+
+    .post-content p {
+        font-size: 16px;
+    }
+
+    .post-content a {
+        font-size: 12px;
+    }
+}

@@ -17,9 +17,15 @@ class Post(db.Model):
 def index():
     return render_template('index.html')
 
+@app.route('/posts')
+def posts():
+    posts = Post.query.all()
+    return render_template("posts.html", posts = posts)
+
 @app.route('/about')
 def about():
     return render_template("about.html")
+
 
 @app.route('/create', methods=['POST','GET'])
 @app.route('/create', methods=['POST', 'GET'])
