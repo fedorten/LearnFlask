@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сохранённые рисунки</title>
+</head>
+<body>
+    <h1>Сохранённые рисунки</h1>
+    <ul>
+        {% for drawing in drawings %}
+            <li>
+                <h2>Рисунок #{{ drawing.id }}</h2>
+                <img src="{{ url_for('img', image_id=drawing.id) }}" alt="Рисунок {{ drawing.id }}" width="300">
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Вернуться на главную</a>
+</body>
+</html>

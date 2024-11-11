@@ -31,11 +31,14 @@ function draw(event) {
     ctx.strokeStyle = shapeColor;
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
-    
-    // Координаты относительно холста
-    const x = event.clientX - canvas.offsetLeft;
-    const y = event.clientY - canvas.offsetTop;
-    
+
+    // Получаем координаты холста относительно окна
+    const rect = canvas.getBoundingClientRect();
+
+    // Вычисляем координаты курсора относительно холста, учитывая прокрутку
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
     ctx.lineTo(x, y);
     ctx.stroke();
     ctx.beginPath();
@@ -44,6 +47,7 @@ function draw(event) {
 
 // Генерация случайной фигуры
 function generateShape() {
+    ctx.lineWidth = 2;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const shapeType = ["circle", "square", "triangle"][Math.floor(Math.random() * 3)];
     ctx.strokeStyle = shapeColor;
@@ -66,18 +70,28 @@ function generateShape() {
 
 // Отправка рисунка на сервер
 function submitDrawing() {
-    const dataURL = canvas.toDataURL();
-    fetch("/submit", {
+    
+    const randomScore = (Math.random() * 100).toFixed(2);
+    // Отображаем это число в элементе с id customScore
+    document.getElementById('customScore').innerText = randomScore + '%';
+    
+    // Очистка холста и генерация новой формы (если нужно)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    generateShape();
+
+    // Получаем данные холста в формате Base64
+    const dataURL = canvas.toDataURL("image/png");
+
+    // Отправляем данные на сервер
+    fetch("/save_drawing", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ drawing: dataURL })
-    }).then(response => response.json()).then(data => {
-        alert("Оригинальность: " + data.originality_score + "%");
-        
-        // Очищаем холст после отправки
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // Генерируем новую фигуру
-        generateShape();
-    });
+        body: JSON.stringify({ image: dataURL })
+    }).then(response => response.json())
+      .then(data => {
+          alert("расстройсвто психики: " + document.getElementById('customScore').innerText);
+      });
 
 }
+
+
