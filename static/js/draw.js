@@ -11,21 +11,27 @@ window.onload = function() {
     canvas.addEventListener("mouseup", stopDrawing);
     canvas.addEventListener("mousemove", draw);
     canvas.addEventListener("mouseleave", stopDrawing);
+
+    // Добавляем обработчики для сенсорных экранов
+    canvas.addEventListener("touchstart", startDrawingTouch);
+    canvas.addEventListener("touchend", stopDrawingTouch);
+    canvas.addEventListener("touchmove", drawTouch);
+    canvas.addEventListener("touchcancel", stopDrawingTouch);
 };
 
-// Начало рисования
+// Начало рисования для мыши
 function startDrawing(event) {
     drawing = true;
     draw(event); // Запуск рисования
 }
 
-// Остановка рисования
+// Остановка рисования для мыши
 function stopDrawing() {
     drawing = false;
     ctx.beginPath(); // Прекращаем путь
 }
 
-// Рисование на холсте
+// Рисование на холсте для мыши
 function draw(event) {
     if (!drawing) return;
     ctx.strokeStyle = shapeColor;
@@ -38,6 +44,41 @@ function draw(event) {
     // Вычисляем координаты курсора относительно холста, учитывая прокрутку
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+}
+
+// Начало рисования для сенсорных экранов
+function startDrawingTouch(event) {
+    event.preventDefault(); // Предотвращаем стандартное поведение (например, прокрутку страницы)
+    drawing = true;
+    drawTouch(event); // Запуск рисования
+}
+
+// Остановка рисования для сенсорных экранов
+function stopDrawingTouch() {
+    drawing = false;
+    ctx.beginPath(); // Прекращаем путь
+}
+
+// Рисование на холсте для сенсорных экранов
+function drawTouch(event) {
+    if (!drawing) return;
+
+    ctx.strokeStyle = shapeColor;
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+
+    // Получаем координаты касания
+    const rect = canvas.getBoundingClientRect();
+    const touch = event.touches[0]; // Берем первое касание (если их несколько)
+
+    // Вычисляем координаты касания относительно холста
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
 
     ctx.lineTo(x, y);
     ctx.stroke();
@@ -66,11 +107,8 @@ function generateShape() {
     ctx.beginPath();
 }
 
-
-
 // Отправка рисунка на сервер
 function submitDrawing() {
-    
     const randomScore = (Math.random() * 100).toFixed(2);
     // Отображаем это число в элементе с id customScore
     document.getElementById('customScore').innerText = randomScore + '%';
@@ -91,7 +129,4 @@ function submitDrawing() {
       .then(data => {
           alert("расстройсвто психики: " + document.getElementById('customScore').innerText);
       });
-
 }
-
-

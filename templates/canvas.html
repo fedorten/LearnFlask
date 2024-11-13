@@ -1,16 +1,23 @@
 {% extends "base.html" %}
 
 {%block title%}
-Страница генерации
+Страница рисования
 {% endblock %}
 
 {%block body%}
 
-
-    <h1>Дорисуй форму!</h1>
+<style>
+    #drawingCanvas {
+        max-width: 100%;      /* Ограничивает ширину холста размерами экрана */
+        height: auto;         /* Автоматически подстраивает высоту, сохраняя пропорции */
+        display: block;       /* Убирает возможные отступы */
+        margin: 0 auto;       /* Центрирует холст */
+    }
+</style>
+    <h1>Сделай из фигуры рисунок!</h1>
     
     <div class="controls">
-        <button onclick="generateShape()">Новая форма</button>
+        <button onclick="generateShape()">Новая фигура</button>
         <button onclick="submitDrawing()">Готово</button>
     </div>
     

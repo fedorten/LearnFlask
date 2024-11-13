@@ -1,10 +1,18 @@
-/* HEADER */
+/* Сброс стилей */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #afb0e4;
+    padding: 0;
+    margin: 0;
+}
+
+/* Общие стили */
 .header__img {
     height: 64px;
     width: 64px;
@@ -14,118 +22,27 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-}
-
-header, footer {
     padding: 20px;
-
 }
 
+/* Контейнер страницы */
 .page {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    min-height: 100vh; 
+    min-height: 100vh;
 }
 
+/* Основное содержимое */
 .content {
     flex: 1;
-    max-width: 100%; 
+    width: 100%;
+    max-width: 1200px;   /* Ограничение максимальной ширины для больших экранов */
     margin: 0 auto;
     padding: 40px 20px;
 }
 
+/* Подвал */
 footer {
-    margin-top: auto;
-}
-
-
-
-/* Общие стили */
-body {
-    font-family: 'Roboto', sans-serif;
-    padding: 0;
-    background-color: #afb0e4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-}
-
-h1 {
-    font-size: 2.5em;
-    color: #333;
     text-align: center;
-    margin: 0 0 20px;
+    margin-top: auto; /* Фиксирует footer внизу */
 }
-
-.controls {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-canvas {
-    border: 2px solid #ccc;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: crosshair;
-    transition: border-color 0.3s ease;
-}
-
-canvas:hover {
-    border-color: #007bff;
-}
-
-.info {
-    text-align: center;
-    margin-top: 0px;
-}
-
-.info p {
-    font-size: 1.2em;
-    color: #555;
-}
-
-.score {
-    font-size: 1.5em;
-    font-weight: 500;
-    color: #28a745;
-    margin-top: 0px;
-}
-
-/* Добавим анимации для кнопок */
-@keyframes buttonClick {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(0.95);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-button:active {
-    animation: buttonClick 0.2s ease;
-}
-
-
-
